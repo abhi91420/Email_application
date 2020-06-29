@@ -1,3 +1,8 @@
+/*
+* This project takes into account an employee details and generate the following using different functions -
+* Email
+* Password
+* */
 import java.util.Scanner;
 
 public class Main {
@@ -17,21 +22,19 @@ public class Main {
         System.out.println("Select Department - ");
         System.out.println("1.sales\n2.it\n3.HR");
         int id = sc.nextInt();
-        switch (id){
-            case 1:
-                dept ="sales";
-                break;
-            case 2:
-                dept= "it";
-                break;
-            case 3:
-                dept = "HR";
-                break;
-            default:
-                dept = " ";
+        dept = switch (id) {
+            case 1 -> "sales";
+            case 2 -> "it";
+            case 3 -> "HR";
+            default -> " ";
         };
 
-        emailGen e = new emailGen(fname,lname,dept,comp);
-        System.out.println(e.gen_email());
+        emailGen e = new emailGen(normalize(fname),normalize(lname),dept,normalize(comp));
+        System.out.println("Generated Email : "+e.gen_email());
+        System.out.println("Corresponding pass :"+e.get_pass());
+    }
+
+    private static String normalize(String S) {
+        return S.toLowerCase();
     }
 }
